@@ -1,0 +1,4 @@
+# Netlify settings: the site is the repo root; the AI function lives in netlify/functions.
+[build]
+  publish = "."
+  functions = "netlify/functions"
