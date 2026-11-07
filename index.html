@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SafeRent – Is this rental listing a scam?</title>
+  <meta name="description" content="Check a rental listing in Cork against official RTB/CSO rents, the PSRA register and Garda warning signs." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- index.html — owned by Person B -->
+  <header>
+    <h1>SafeRent</h1>
+    <p class="tagline">Paste a rental ad. Get a scam-risk check in plain English, based on official Irish data.</p>
+  </header>
+
+  <main>
+    <form id="check-form">
+      <label for="listing">Paste the listing <span class="req">*</span></label>
+      <textarea id="listing" name="listing" rows="7" required placeholder="Copy the full ad text from Daft, Facebook, etc."></textarea>
+      <p class="small">Don't paste your own personal details. Listings are not saved.</p>
+
+      <fieldset>
+        <legend>What is it? <span class="req">*</span></legend>
+        <label class="inline"><input type="radio" name="kind" value="whole" checked /> Whole property</label>
+        <label class="inline"><input type="radio" name="kind" value="room" /> Room in a shared house</label>
+      </fieldset>
+
+      <label for="area">Area <span class="req">*</span></label>
+      <select id="area" name="area" required></select>
+
+      <div id="whole-fields">
+        <div class="row">
+          <div>
+            <label for="bedrooms">Bedrooms <span class="req">*</span></label>
+            <select id="bedrooms" name="bedrooms">
+              <option>One bed</option>
+              <option selected>Two bed</option>
+              <option>Three bed</option>
+              <option>Four plus bed</option>
+            </select>
+          </div>
+          <div>
+            <label for="propertyType">Property type</label>
+            <select id="propertyType" name="propertyType">
+              <option>All property types</option>
+              <option>Apartment</option>
+              <option>Terrace house</option>
+              <option>Semi detached house</option>
+              <option>Detached house</option>
+              <option>Other flats</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <p id="room-note" class="small" hidden>Official averages only cover whole properties, so the price check is skipped for rooms.</p>
+
+      <div class="row">
+        <div>
+          <label for="rent">Rent (€) <span class="req">*</span></label>
+          <input id="rent" name="rent" type="number" min="1" step="1" required inputmode="numeric" />
+        </div>
+        <div>
+          <label for="period">Per</label>
+          <select id="period" name="period">
+            <option value="month">month</option>
+            <option value="week">week</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="agency">Agency name <span class="opt">(if the ad says it's an agency)</span></label>
+      <input id="agency" name="agency" type="text" autocomplete="off" />
+
+      <label for="address">Address or Eircode <span class="opt">(optional, not saved)</span></label>
+      <input id="address" name="address" type="text" autocomplete="off" />
+
+      <fieldset>
+        <legend>In your messages with them…</legend>
+        <div class="question">
+          <span>Have they asked you to pay anything before a viewing?</span>
+          <label class="inline"><input type="radio" name="q_pay" value="yes" /> Yes</label>
+          <label class="inline"><input type="radio" name="q_pay" value="no" checked /> No</label>
+        </div>
+        <div class="question">
+          <span>Have they said you can't view it in person?</span>
+          <label class="inline"><input type="radio" name="q_view" value="yes" /> Yes</label>
+          <label class="inline"><input type="radio" name="q_view" value="no" checked /> No</label>
+        </div>
+        <div class="question">
+          <span>Do they want money transfer, crypto or payment to an account abroad?</span>
+          <label class="inline"><input type="radio" name="q_method" value="yes" /> Yes</label>
+          <label class="inline"><input type="radio" name="q_method" value="no" checked /> No</label>
+        </div>
+      </fieldset>
+
+      <button id="submit" type="submit">Check this listing</button>
+      <p id="status" class="status" aria-live="polite"></p>
+    </form>
+
+    <section id="result" class="result" aria-live="polite" hidden></section>
+  </main>
+
+  <footer>
+    <p id="data-note" class="small"></p>
+    <p class="small">
+      Data: CSO / RTB average rents (RIQ02), PSRA Register of Licensed Property Services Providers, Garda accommodation-fraud advice.
+      SafeRent is a guide, not legal advice. Built at Corkathon 2026.
+    </p>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
